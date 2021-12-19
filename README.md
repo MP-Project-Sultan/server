@@ -39,6 +39,10 @@ POST          | admin + user  |`/posts/addpost`                        |{img, de
 PUT           | admin + user  |`/posts/updatepost/:_id`                |{id}
 DELETE        | admin + user  |`/posts/delete/:_id`                    |
 
+
+## ERD
+![ERD](./ERD2.png)
+
 ## Models
 
 - user model
@@ -102,6 +106,4 @@ DELETE        | admin + user  |`/posts/delete/:_id`                    |
 
 
 
-## ERD
-![ERD](./ERD.png)
 
