@@ -38,6 +38,62 @@ POST          | admin + user  |`/posts/addpost`                        |{img, de
 PUT           | admin + user  |`/posts/updatepost/:_id`                |{id}
 DELETE        | admin + user  |`/posts/delete/:_id`                    |
 
+## Models
+
+- user model
+
+| key        | type            | options          | default value |
+| ---------- | --------------- | ---------------- | ------------- |
+| username   | String          | required, unique | n/a           |
+| email      | String          | required, unique | n/a           |
+| password   | String          | required         | n/a           |
+| roles      | Schema <roles>  | required         | n/a           |
+| status     | Boolean         | n/a              | false         |
+
+- roles model
+
+| key  | type   | options          | default value |
+| ---- | ------ | ---------------- | ------------- |
+| role | String | required, unique | n/a           |
+
+- posts model
+
+| key         | type              | options  | default value |
+| ----------- | ----------------- | -------- | ------------- |
+| description | String            | required | n/a           |
+| userId      | Schema <user>     | required | n/a           |
+| time        | Number            | required | n/a           |
+
+- comments model
+
+| key         | type            | options  | default value |
+| ----------- | --------------- | -------- | ------------- |
+| userId      | Schema <user>   | required | n/a           |
+| description | String          | required | n/a           |
+| postId      | Schema <post>   | required | n/a           |
+
+- room model
+
+| key         | type            | options  | default value |
+| ----------- | --------------- | -------- | ------------- |
+| to          | Schema <user>   | required | n/a           |
+| from        | Schema <user>   | required | n/a           |
+| description | String          | required | n/a           |
+
+- like model
+
+| key         | type            | options  | default value |
+| ----------- | --------------- | -------- | ------------- |
+| userId      | Schema <user>   | required | n/a           |
+| postId      | Schema <posts> | required | n/a            |
+
+- message model 
+
+| key      | type             | options  | default value |
+| -------- | ---------------- | -------- | ------------- |
+| user1    | Schema <user>    | required | n/a           |
+| user2    | Schema <user>    | required | n/a           |
+| messages | array of objects | required | n/a           |
 
 ## UML
 ![UML](./UML.png)
