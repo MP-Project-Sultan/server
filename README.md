@@ -14,30 +14,32 @@
  ### Answer : Can add Answers to questions
  ### Admins there have full control like Delete and update and spam users with admin dashboard
  ### Users Can add and update thire own Posts 
-#### presentation  slides on https://www.sultan.com
+#### server side url https://github.com/MP-Project-Sultan/server
+#### presentation slides http://www.sultan.com
+#### project deployed there http://heroku.sultan.com
 
 ###
- HTTP Method  | authorization     |    Path   , HTTP code                             |  Request  Body                 
-------------- | -----------   | ---------------------------            |----------------------
-POST          | everyone      |`/user/create` =>  ok = 200 , error = 400          |{email,username, password, role} 
-POST          | user + admin  |`/user/login`  =>   ok = 200 , error = 400                      |{email or username, password}
-GET           | admin only    |`/user/`   =>   ok = 200 , error = 400                          |
-DELETE        | admin only    |`/user/deleteusrid/:_id` => ok = 200 , error = 400                |
-GET           | user          |`/user/confirmation/:confcode/` => ok = 200 , error = 400         |
-PUT           | user          |`/user/forgetPassword`  => ok = 200 , error = 400            |{email}
-PUT           | user          |`/user/resetPassword` => ok = 200 , error = 400|{resetCode, newPassword}
-POST          | everyone      |`/user/googlelogin` =>  ok = 200 , error = 400 |{Token id}
-post          | admin + user  |`/likes/`    =>   ok = 200 , error = 400 |{userId, PostId}
-delete        | admin + user  |`/likes/:id`  =>          ok = 200 , error = 400                |{like id}
-GET           | admin + user  |`/likes/:PostId`  =>    ok = 200 , error = 400                  |{postId}
-POST          | admin + user  |`/comment/addComment` =>  ok = 200 , error = 400                 |{title, postId, userId}
-PUT           | admin + user  |`/comment/update`  =>    ok = 200 , error = 400                  |{commentId, description}
-DELETE        | admin + user  |`/comment/delete/:id` =>  ok = 200 , error = 400                 |
-GET           | admin + user  |`/posts/`                               |
-GET           | admin + user  |`/posts/getPost/:postid` => ok = 200 , error = 400                |
-POST          | admin + user  |`/posts/addpost`   =>    ok = 200 , error = 400                 |{img, description}
-PUT           | admin + user  |`/posts/updatepost/:_id` => ok = 200 , error = 400              |{id}
-DELETE        | admin + user  |`/posts/delete/:_id`  =>   ok = 200 , error = 400               |
+ HTTP Method  | authorization     |    Path                            |  Request  Body       | HTTP Code              
+------------- | -----------   | ---------------------------            |----------------------  |---------
+POST          | everyone      |`/user/create`        |{email,username, password, role} | ok 200 , error 400
+POST          | user + admin  |`/user/login`                        |{email or username, password}| ok 200 , error 400
+GET           | admin only    |`/user/`                           | | ok 200 , error 400
+DELETE        | admin only    |`/user/deleteusrid/:_id`             |   |ok 200 , error 400
+GET           | user          |`/user/confirmation/:confcode/`     |    |ok 200 , error 400
+PUT           | user          |`/user/forgetPassword`          |{email}|ok 200 , error 400
+PUT           | user          |`/user/resetPassword` |{resetCode, newPassword} | ok 200 , error 400
+POST          | everyone      |`/user/googlelogin`  |{Token id} | ok 200 , error 400
+post          | admin + user  |`/likes/`     |{userId, PostId} | ok 200 , error 400
+delete        | admin + user  |`/likes/:id`                  |{like id}| ok 200 , error 400
+GET           | admin + user  |`/likes/:PostId`                    |{postId}| ok 200 , error 400
+POST          | admin + user  |`/comment/addComment`                  |{title, postId, userId}| ok 200 , error 400
+PUT           | admin + user  |`/comment/update`                    |{commentId, description}| ok 200 , error 400
+DELETE        | admin + user  |`/comment/delete/:id`                  | | ok 200 , error 400
+GET           | admin + user  |`/posts/`                               | | ok 200 , error 400
+GET           | admin + user  |`/posts/getPost/:postid`                || ok 200 , error 400
+POST          | admin + user  |`/posts/addpost`                    |{img, description} | ok 200 , error 400
+PUT           | admin + user  |`/posts/updatepost/:_id`               |{id}| ok 200 , error 400
+DELETE        | admin + user  |`/posts/delete/:_id`                | | ok 200 , error 400
 
  
 
