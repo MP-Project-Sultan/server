@@ -17,27 +17,29 @@
 #### presentation  slides on https://www.sultan.com
 
 ###
- HTTP Method  | authorization     |    Path                                |  Request Body
+ HTTP Method  | authorization     |    Path   , HTTP code                             |  Request  Body                 
 ------------- | -----------   | ---------------------------            |----------------------
-POST          | everyone      |`/user/create`                          |{email,username, password, role}
-POST          | user + admin  |`/user/login`                           |{email or username, password}
-GET           | admin only    |`/user/`                                |
-DELETE        | admin only    |`/user/deleteusrid/:_id`                |
-GET           | user          |`/user/confirmation/:confcode/`         |
-PUT           | user          |`/user/forgetPassword`                  |{email}
-PUT           | user          |`/user/resetPassword`                   |{resetCode, newPassword}
-POST          | everyone      |`/user/googlelogin`                     |{Token id}
-post          | admin + user  |`/likes/`                               |{userId, PostId}
-delete        | admin + user  |`/likes/:id`                            |{like id}
-GET           | admin + user  |`/likes/:PostId`                        |{postId}
-POST          | admin + user  |`/comment/addComment`                   |{title, postId, userId}
-PUT           | admin + user  |`/comment/update`                       |{commentId, description}
-DELETE        | admin + user  |`/comment/delete/:id`                   |
+POST          | everyone      |`/user/create` =>  ok = 200 , error = 400          |{email,username, password, role} 
+POST          | user + admin  |`/user/login`  =>   ok = 200 , error = 400                      |{email or username, password}
+GET           | admin only    |`/user/`   =>   ok = 200 , error = 400                          |
+DELETE        | admin only    |`/user/deleteusrid/:_id` => ok = 200 , error = 400                |
+GET           | user          |`/user/confirmation/:confcode/` => ok = 200 , error = 400         |
+PUT           | user          |`/user/forgetPassword`  => ok = 200 , error = 400            |{email}
+PUT           | user          |`/user/resetPassword` => ok = 200 , error = 400|{resetCode, newPassword}
+POST          | everyone      |`/user/googlelogin` =>  ok = 200 , error = 400 |{Token id}
+post          | admin + user  |`/likes/`    =>   ok = 200 , error = 400 |{userId, PostId}
+delete        | admin + user  |`/likes/:id`  =>          ok = 200 , error = 400                |{like id}
+GET           | admin + user  |`/likes/:PostId`  =>    ok = 200 , error = 400                  |{postId}
+POST          | admin + user  |`/comment/addComment` =>  ok = 200 , error = 400                 |{title, postId, userId}
+PUT           | admin + user  |`/comment/update`  =>    ok = 200 , error = 400                  |{commentId, description}
+DELETE        | admin + user  |`/comment/delete/:id` =>  ok = 200 , error = 400                 |
 GET           | admin + user  |`/posts/`                               |
-GET           | admin + user  |`/posts/getPost/:postid`                |
-POST          | admin + user  |`/posts/addpost`                        |{img, description}
-PUT           | admin + user  |`/posts/updatepost/:_id`                |{id}
-DELETE        | admin + user  |`/posts/delete/:_id`                    |
+GET           | admin + user  |`/posts/getPost/:postid` => ok = 200 , error = 400                |
+POST          | admin + user  |`/posts/addpost`   =>    ok = 200 , error = 400                 |{img, description}
+PUT           | admin + user  |`/posts/updatepost/:_id` => ok = 200 , error = 400              |{id}
+DELETE        | admin + user  |`/posts/delete/:_id`  =>   ok = 200 , error = 400               |
+
+ 
 
 
 ## ERD
