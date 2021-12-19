@@ -40,7 +40,7 @@ DELETE        | admin + user  |`/posts/delete/:_id`                    |
 
 
 ## UML
-![UML](./finaluml.png)
+![UML](./UML.png)
 
 
 
