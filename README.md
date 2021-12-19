@@ -16,7 +16,7 @@
  ### Users Can add and update thire own Posts 
 
 ###
-### HTTP Method  | authorization     |    Path                                |  Request Body
+ HTTP Method  | authorization     |    Path                                |  Request Body
 ------------- | -----------   | ---------------------------            |----------------------
 POST          | everyone      |`/user/create`                          |{email,username, password, role}
 POST          | user + admin  |`/user/login`                           |{email or username, password}
@@ -48,5 +48,3 @@ DELETE        | admin + user  |`/posts/delete/:_id`                    |
 ## ERD
 ![ERD](./ERD.png)
 
-## WireFrame
-![ERD](./wireframe.png)
