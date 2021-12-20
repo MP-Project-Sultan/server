@@ -10,7 +10,8 @@ app.use(cors())
 app.use(express.json())
 
 
-const roleRouter = require('./routers/routes/role')
+const roleRouter = require('./routes/routers/role')
+app.use(roleRouter)
 const PORT = process.env.PORT || 6500
 app.listen(PORT , ()=>{
     console.log(`Server work on ${PORT}`);
