@@ -14,6 +14,13 @@ const roleRouter = require('./routers/routes/role')
 app.use(roleRouter)
 const userRouter = require("./routers/routes/user");
 app.use(userRouter)
+const postRouter = require("./routers/routes/post");
+app.use(postRouter);
+const commentRouter = require("./routers/routes/comment")
+app.use(commentRouter)
+
+
+
 const PORT = process.env.PORT || 6500
 app.listen(PORT , ()=>{
     console.log(`Server work on ${PORT}`);

@@ -84,7 +84,7 @@ const login = (req, res) => {
           if (crackedpwd) {
             if (result.isActive == true) {
               const options = {
-                expiresIn: "3600",
+                expiresIn: 60 * 60,
               };
               const token = jwt.sign(payload, SECKEY, options);
               res.status(200).json({ result, token });
