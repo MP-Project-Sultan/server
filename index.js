@@ -16,6 +16,8 @@ const userRouter = require("./routers/routes/user");
 app.use(userRouter)
 const postRouter = require("./routers/routes/post");
 app.use(postRouter);
+const commentRouter = require("./routers/routes/comment")
+app.use(commentRouter)
 
 
 

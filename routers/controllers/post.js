@@ -19,7 +19,7 @@ const addPost = (req, res) => {
 const getPosts = (req, res) => {
   postModel
     .find({ isDel: false })
-    .populate("commentId", "description - _id")
+    // .populate("commentId", "description - _id")
     .then((result) => {
       res.status(200).json(result);
     })
@@ -45,8 +45,8 @@ const getPostById = (req, res) => {
 const deletePost = (req, res) => {
   const { id } = req.body;
   postModel
-    .findByIdAndUpdate(id, { $set: { isDelete: true } })
-    .exec.then((result) => {
+    .findByIdAndUpdate(id, { $set: { isDel: true } })
+    .then((result) => {
       res.status(200).json("Deleted");
     })
     .catch((err) => {
