@@ -15,11 +15,21 @@ const addPost = (req, res) => {
       res.status(400).json(err);
     });
 };
-
+const getPostsAdmin = (req, res) => {
+  postModel
+    .find()
+    .populate("commentId", "description")
+    .then((result) => {
+      res.status(200).json(result);
+    })
+    .catch((err) => {
+      res.status(400).json(err);
+    });
+};
 const getPosts = (req, res) => {
   postModel
     .find({ isDel: false })
-    // .populate("commentId", "description - _id")
+    .populate("commentId", "description userId -_id")
     .then((result) => {
       res.status(200).json(result);
     })
@@ -70,4 +80,10 @@ const updatePost = (req, res) => {
     })
 };
 
-module.exports = { deletePost, addPost, getPostById, getPosts, updatePost };
+module.exports = {
+  getPostsAdmin,deletePost,
+  addPost,
+  getPostById,
+  getPosts,
+  updatePost,
+};
