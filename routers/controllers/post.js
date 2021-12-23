@@ -20,7 +20,7 @@ const addPost = (req, res) => {
 const getPostsAdmin = (req, res) => {
   postModel
     .find()
-    .populate("commentId", "description ")
+    .populate("commentId userId like")
     .then((result) => {
       res.status(200).json(result);
     })
