@@ -13,5 +13,6 @@ const user = new mongoose.Schema({
   isActive: { type: Boolean, default: false },
   activeCode: { type: String },
   passwordCode: { type: String },
+  isDel:{type: Boolean, default: false}
 });
 module.exports = mongoose.model("User" , user)
