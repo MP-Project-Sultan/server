@@ -75,30 +75,36 @@ const login = (req, res) => {
     .findOne({ $or: [{ email }, { username }] })
     .then(async (result) => {
       if (result) {
-        if (email == result.email || username == result.username) {
-          const payload = {
-            role: result.role,
-            id: result._id,
-          };
-          const crackedpwd = await bcrypt.compare(password, result.password);
-          if (crackedpwd) {
-            if (result.isActive == true) {
-              const options = {
-                expiresIn: 60 * 60,
-              };
-              const token = jwt.sign(payload, SECKEY, options);
-              res.status(200).json({ result, token });
+        if (result.isDel == false) {
+          if (email == result.email || username == result.username) {
+            const payload = {
+              role: result.role,
+              id: result._id,
+              isDel: result.isDel,
+            };
+            // console.log(payload);
+            console.log(result);
+
+            const crackedpwd = await bcrypt.compare(password, result.password);
+            if (crackedpwd) {
+              if (result.isActive == true) {
+                const options = {
+                  expiresIn: 600 * 600,
+                };
+                const token = jwt.sign(payload, SECKEY, options);
+                res.status(200).json({ result, token });
+              } else {
+                res.status(400).json("please Active your Account");
+              }
             } else {
-              res.status(400).json("please Active your Account");
+              res.status(400).json("worng email || password");
             }
           } else {
-            res.status(400).json("worng email || password");
+            res.ststus(400).json("worng email || password");
           }
         } else {
-          res.ststus(400).json("worng email || password");
-        }
-      } else {
-        res.status(400).json("email dosn't match our records");
+          res.status(400).json("email dosn't match our records");
+        } 
       }
     })
     .catch((err) => {
@@ -108,7 +114,7 @@ const login = (req, res) => {
 const deleteUser = (req, res) => {
   const { id } = req.params;
   userModel
-    .findByIdAndRemove(id)
+    .findByIdAndUpdate(id , {$set:{isDel :true}})
     .exec()
     .then((result) => {
       res.status(200).json("Deleted");
@@ -177,19 +183,20 @@ const resetPassword = async (req, res) => {
   const user = await userModel.findOne({ _id: id });
   if (user.passwordCode == code) {
     const hashedPassword = await bcrypt.hash(password, SALT);
-    userModel.findByIdAndUpdate(
-      id,
-      { password: hashedPassword, passwordCode: "" },
-      { new: true }
-    )
-    .then((result)=>{
-      res.status(200).json(result)
-    })
-    .catch((error)=>{
-      res.status(400).json(error)
-    })
+    userModel
+      .findByIdAndUpdate(
+        id,
+        { password: hashedPassword, passwordCode: "" },
+        { new: true }
+      )
+      .then((result) => {
+        res.status(200).json(result);
+      })
+      .catch((error) => {
+        res.status(400).json(error);
+      });
   } else {
-    res.status(400).json("worng Code...")
+    res.status(400).json("worng Code...");
   }
 };
 
