@@ -1,10 +1,12 @@
 const postModel = require("../../db/models/post");
+const commentModel = require("../../db/models/comment");
+
 const addPost = (req, res) => {
   const { description, img } = req.body;
   const newpost = new postModel({
     description,
     img,
-    // userId: req.token._id,
+    userId: req.token.id,
   });
   newpost
     .save()
@@ -18,7 +20,7 @@ const addPost = (req, res) => {
 const getPostsAdmin = (req, res) => {
   postModel
     .find()
-    .populate("commentId", "description")
+    .populate("commentId", "description ")
     .then((result) => {
       res.status(200).json(result);
     })
@@ -29,11 +31,12 @@ const getPostsAdmin = (req, res) => {
 const getPosts = (req, res) => {
   postModel
     .find({ isDel: false })
-    .populate("commentId", "description userId -_id")
+    .populate("commentId userId like")
     .then((result) => {
       res.status(200).json(result);
     })
     .catch((err) => {
+      console.log(err);
       res.status(400).json(err);
     });
 };
@@ -72,16 +75,17 @@ const updatePost = (req, res) => {
       if (result) {
         res.status(200).json("updated");
       } else {
-        res.status(400).json(err)
+        res.status(400).json(err);
       }
     })
-    .catch((err) =>{
-      res.status(400).json(err)
-    })
+    .catch((err) => {
+      res.status(400).json(err);
+    });
 };
 
 module.exports = {
-  getPostsAdmin,deletePost,
+  getPostsAdmin,
+  deletePost,
   addPost,
   getPostById,
   getPosts,

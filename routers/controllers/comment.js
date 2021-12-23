@@ -24,7 +24,7 @@ const addComment = (req, res) => {
 const getComments = (req, res) => {
   commentModel
     .find({})
-    .populate("postId", "description -_id")
+    // .populate("postId userId")
     .then((result) => {
       res.status(200).json(result);
     })
