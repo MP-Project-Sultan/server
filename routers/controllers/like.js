@@ -22,7 +22,7 @@ const addLike = (req, res) => {
 const deleteLike = (req, res) => {
   const { id } = req.body;
   likeModel
-    .findByIdAndDelete({ _id: id })
+    .findByIdAndRemove({ _id: id })
     .exec()
     .then((result) => {
       console.log(result);
