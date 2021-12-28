@@ -3,10 +3,12 @@ const app = express()
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const cors = require('cors');
+const morgan = require('morgan');
 dotenv.config()
 require('./db')
 app.use(express())
 app.use(cors())
+app.use(morgan())
 app.use(express.json())
 
 
