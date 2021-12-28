@@ -31,7 +31,6 @@ const register = async (req, res) => {
     role,
     activeCode,
   });
-  newUser;
   newUser
     .save()
     .then((result) => {
@@ -44,7 +43,7 @@ const register = async (req, res) => {
             <h2> Hi ${nemail}</h2> 
             <h4> Code: ${activeCode}</h4> 
             <p> Thank you for registeration , kindly confirm your email by insert code on following link</p>
-            <a href="https://sultan.com/verify_account/${result._id}> click here</a>`,
+            <a href="http://localhost:3000/active/${result._id} click here</a>`,
         })
         .catch((err) => console.log(err));
       res.status(201).json(result);
@@ -55,7 +54,9 @@ const register = async (req, res) => {
 };
 const verifyAccount = async (req, res) => {
   const { id, code } = req.body;
+  console.log(code);
   const user = await userModel.findOne({ _id: id });
+  console.log(user);
   if (user.activeCode == code) {
     userModel
       .findByIdAndUpdate(id, { isActive: true, activeCode: "" }, { new: true })
@@ -166,7 +167,7 @@ const checkEmail = async (req, res) => {
             html: `<h1>Reset your Password</h1>
         <h2> Hello ${result.username}</h2>
         <h4>Code:${passwordCode}</h4>
-        <a href=https://sultan.com/reset_password/${result._id}> Click here</a>`,
+        <a href=http://localhost:3000/reset2/${result._id}> Click here</a>`,
           })
           .catch((err) => console.log(err));
         res.status(200).json(result);

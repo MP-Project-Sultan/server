@@ -18,6 +18,7 @@ const addPost = (req, res) => {
     });
 };
 const getPostsAdmin = (req, res) => {
+  
   postModel
     .find()
     .populate("commentId userId like")
