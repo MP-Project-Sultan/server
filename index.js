@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const cors = require('cors');
 const morgan = require('morgan');
+const socket = require('socket.io')
 dotenv.config()
 require('./db')
 app.use(express())

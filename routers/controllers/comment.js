@@ -24,7 +24,8 @@ const addComment = (req, res) => {
 const getComments = (req, res) => {
   commentModel
     .find({})
-    // .populate("postId userId")
+    // .populate("commentId userId like")
+    .populate("userId")
     .then((result) => {
       res.status(200).json(result);
     })
@@ -42,6 +43,19 @@ const getCommentById = (req, res) => {
       } else {
         res.status(400).json(result);
       }
+    })
+    .catch((err) => {
+      res.status(400).json(err);
+    });
+};
+const getCommentsForPost = (req, res) => {
+  const { id } = req.params;
+  commentModel
+    .find({ postId: id, isDel: false })
+    .populate("userId postId")
+    .exec()
+    .then((result) => {
+      res.status(200).json(result);
     })
     .catch((err) => {
       res.status(400).json(err);
@@ -82,4 +96,5 @@ module.exports = {
   getCommentById,
   updateComment,
   deleteComment,
+  getCommentsForPost,
 };

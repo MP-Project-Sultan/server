@@ -33,6 +33,7 @@ const getPosts = (req, res) => {
   postModel
     .find({ isDel: false })
     .populate("commentId userId like")
+
     .then((result) => {
       res.status(200).json(result);
     })
