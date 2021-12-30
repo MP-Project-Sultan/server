@@ -58,7 +58,7 @@ const getPostById = (req, res) => {
     });
 };
 const deletePost = (req, res) => {
-  const { id } = req.body;
+  const { id } = req.params;
   postModel
     .findByIdAndUpdate(id, { $set: { isDel: true } })
     .then((result) => {

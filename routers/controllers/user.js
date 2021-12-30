@@ -12,6 +12,16 @@ const transport = nodemailer.createTransport({
     pass: process.env.PASS,
   },
 });
+const getUsers = (req, res) => {
+  userModel
+    .find({})
+    .then((result) => {
+      res.status(200).json(result);
+    })
+    .catch((err) => {
+      res.status(400).json(err);
+    });
+};
 const register = async (req, res) => {
   const { email, username, password, role, img } = req.body;
   const nemail = email.toLowerCase();
@@ -45,7 +55,7 @@ const register = async (req, res) => {
             <p> Thank you for registeration , kindly confirm your email by insert code on following link</p>
             <a href="http://localhost:3000/active/${result._id} click here</a>`,
         })
-        .catch((err) => console.log(err));
+        // .catch((err) => console.log(err));
       res.status(201).json(result);
     })
     .catch((err) => {
@@ -105,7 +115,7 @@ const login = (req, res) => {
           }
         } else {
           res.status(400).json("email dosn't match our records");
-        } 
+        }
       }
     })
     .catch((err) => {
@@ -115,7 +125,7 @@ const login = (req, res) => {
 const deleteUser = (req, res) => {
   const { id } = req.params;
   userModel
-    .findByIdAndUpdate(id , {$set:{isDel :true}})
+    .findByIdAndUpdate(id, { $set: { isDel: true } })
     .exec()
     .then((result) => {
       res.status(200).json("Deleted");
@@ -200,6 +210,21 @@ const resetPassword = async (req, res) => {
     res.status(400).json("worng Code...");
   }
 };
+const getUserById = (req, res) => {
+  const { id } = req.params;
+  userModel
+    .find({ _id: id }, { password: 0, passwordCode: 0, isDel:0 })
+    .then((result) => {
+      if (result) {
+        res.status(200).json(result);
+      } else {
+        res.status(404).json(result);
+      }
+    })
+    .catch((err) => {
+      res.status(400).json(err);
+    });
+};
 
 module.exports = {
   register,
@@ -209,4 +234,6 @@ module.exports = {
   updateUser,
   checkEmail,
   resetPassword,
+  getUserById,
+  getUsers,
 };

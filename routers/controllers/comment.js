@@ -62,7 +62,7 @@ const getCommentsForPost = (req, res) => {
     });
 };
 const deleteComment = (req, res) => {
-  const { id } = req.body;
+  const { id } = req.params;
   commentModel
     .findOneAndRemove(id)
     .exec()
