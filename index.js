@@ -23,8 +23,10 @@ const commentRouter = require("./routers/routes/comment")
 app.use(commentRouter)
 const likeRouter = require("./routers/routes/like")
 app.use(likeRouter)
-const chatRouter = require('./routers/routes/chat')
-app.use(chatRouter)
+const chatRouter = require("./routers/routes/chat");
+app.use(chatRouter);
+const votRouter = require('./routers/routes/vot')
+app.use(votRouter)
 
 
 const PORT = process.env.PORT || 6500

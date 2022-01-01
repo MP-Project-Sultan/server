@@ -1,4 +1,3 @@
-const { response } = require("express");
 const likeModel = require("../../db/models/like");
 const postModel = require("../../db/models/post");
 
