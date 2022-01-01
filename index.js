@@ -23,9 +23,23 @@ const commentRouter = require("./routers/routes/comment")
 app.use(commentRouter)
 const likeRouter = require("./routers/routes/like")
 app.use(likeRouter)
+const chatRouter = require('./routers/routes/chat')
+app.use(chatRouter)
 
 
 const PORT = process.env.PORT || 6500
-app.listen(PORT , ()=>{
+const server = app.listen(PORT , ()=>{
     console.log(`Server work on ${PORT}`);
 })
+
+
+const io = socket(server, { cors: { origin: "*" } });
+
+io.on("connection", (socket) => {
+  console.log("connected ")
+
+  socket.on("message", (data) => {
+    addMessage(data.from, data.to, data.message, data.username);
+    io.emit("message", data);
+  });
+});
