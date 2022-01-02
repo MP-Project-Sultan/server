@@ -2,8 +2,9 @@ const postModel = require("../../db/models/post");
 const commentModel = require("../../db/models/comment");
 
 const addPost = (req, res) => {
-  const { description, img } = req.body;
+  const { description, img, title } = req.body;
   const newpost = new postModel({
+    title,
     description,
     img,
     userId: req.token.id,
@@ -69,10 +70,10 @@ const deletePost = (req, res) => {
     });
 };
 const updatePost = (req, res) => {
-  const { description } = req.body;
+  const { description, title } = req.body;
   const { id } = req.params;
   postModel
-    .findByIdAndUpdate(id, { $set: { description: description } })
+    .findByIdAndUpdate(id, { $set: { description: description, title: title } })
     .then((result) => {
       if (result) {
         res.status(200).json("updated");
