@@ -52,7 +52,7 @@ const getCommentsForPost = (req, res) => {
   const { id } = req.params;
   commentModel
     .find({ postId: id, isDel: false })
-    .populate("userId postId")
+    .populate("userId postId vot")
     .exec()
     .then((result) => {
       res.status(200).json(result);

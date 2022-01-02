@@ -38,10 +38,16 @@ const server = app.listen(PORT , ()=>{
 const io = socket(server, { cors: { origin: "*" } });
 
 io.on("connection", (socket) => {
-  console.log("connected ")
+  console.log('connected');
+  socket.on("join_room", (data) => {
+    socket.join(data.room);
+    console.log(`${data.userName} has entered the room number ${data.room}`);
+  });
 
-  socket.on("message", (data) => {
-    addMessage(data.from, data.to, data.message, data.username);
-    io.emit("message", data);
+  socket.on("send_message", (data) => {
+    socket.to(data.room).emit("recieve_message", {
+      userName: data.userName,
+      content: data.content,
+    });
   });
 });

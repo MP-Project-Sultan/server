@@ -43,7 +43,7 @@ const getPosts = (req, res) => {
     });
 };
 const getPostById = (req, res) => {
-  const { id } = req.body;
+  const { id } = req.params;
   postModel
     .find({ _id: id })
     .then((result) => {
