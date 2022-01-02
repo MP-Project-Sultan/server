@@ -18,7 +18,7 @@ userRouter.post('/register', register)
 userRouter.post('/active',verifyAccount)
 userRouter.post('/login' , login)
 userRouter.delete("/deleteUser/:id", authentication, authorization, deleteUser);
-userRouter.put("/updateUser/:id",authentication, authorization, updateUser);
+userRouter.put("/updateUser/:id",authentication, updateUser);
 userRouter.post("/check/", checkEmail);
 userRouter.get("/getUserById/:id", authentication, getUserById);
 
