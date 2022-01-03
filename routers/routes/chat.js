@@ -13,6 +13,6 @@ const authentication = require("./../middleware/authentication");
 chatRouter.post("/getChat/:id", authentication, getChat);
 chatRouter.post("/addMessage", authentication, addMessage);
 chatRouter.post("/createRoom", authentication, createRoom);
-chatRouter.get("/roomChat/:to", authentication, getRoomMessages);
+chatRouter.get("/getmsg/:to", authentication, getRoomMessages);
 
 module.exports = chatRouter;

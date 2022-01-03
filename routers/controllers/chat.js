@@ -53,7 +53,7 @@ const createRoom = (req, res) => {
 const getRoomMessages = async (req, res) => {
   try {
     const {  to } = req.params;
-     const { from } = req.token.id;
+     const  from  = req.token.id;
 
     const result1 = await chatModel.findOne({ from, to }).populate("message");
     res.status(200).json(result1);
@@ -64,13 +64,13 @@ const getRoomMessages = async (req, res) => {
 };
 
 const addMessage = (req, res) => {
-  const { from, content, room, to } = req.body;
+  const { content, room, to } = req.body;
+  const from = req.token.id
   const options = {
     upsert: true,
     new: true,
     setDefaultsOnInsert: true,
   };
-
   const newMessage = new messageModel({
     from,
     to,
