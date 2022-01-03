@@ -1,51 +1,103 @@
 const chatModel = require("./../../db/models/chat");
-const userHistory = require("./../../db/models/userHistory");
-const getChat = (req, res) => {
-  chatModel
-    .find({ $or: [{ from: req.token.id }, { to: req.token.id }] })
+const messageModel = require("./../../db/models/message");
+
+const getChat = async (req, res) => {
+  const id = req.params.id;
+
+  const result1 = await chatModel.find({ from: req.token.id, to: id });
+  const result2 = await chatModel.find({ from: id, to: req.token.id });
+  console.log(result1, result2, "here");
+  if (result1.length !== 0) {
+    res.status(200).json(result1);
+  }
+  if (result2.length !== 0) {
+    res.status(200).json(result2);
+  }
+
+  if (result1.length === 0 && result2.length === 0) {
+    const newChat = new chatModel({
+      from: req.token.id,
+      to: id,
+    });
+
+    newChat
+      .save()
+      .then((result) => {
+        res.status(201).json(result);
+      })
+      .catch((err) => {
+        console.log(err);
+        res.json(err);
+      });
+  }
+};
+
+const createRoom = (req, res) => {
+  const { from, to } = req.body;
+  const newChat = new chatModel({
+    from,
+    to,
+  });
+
+  newChat
+    .save()
     .then((result) => {
-      if (result) {
-        res.status(200).send(result);
-      } else {
-        res.status(200).json("no message");
-      }
+      res.status(201).json(result);
     })
     .catch((err) => {
-      res.status(400).json(err);
+      console.log(err);
+      res.json(err);
     });
 };
-const getHistory = (req, res) => {
-  userHistory
-    .find({ user: req.token.id })
-    .populate("userHistory")
-    .then((result) => {
-      if (result) {
-        res.status(200).send(result);
-      } else {
-        res.status(200).json("no message");
-      }
-    })
-    .catch((err) => {
-      res.status(400).json(err);
-    });
+
+const getRoomMessages = async (req, res) => {
+  try {
+    const {  to } = req.params;
+     const { from } = req.token.id;
+
+    const result1 = await chatModel.findOne({ from, to }).populate("message");
+    res.status(200).json(result1);
+  } catch (error) {
+    console.log(error);
+    res.status(400).json(error);
+  }
 };
-const addMessage = (from, to, message, username) => {
+
+const addMessage = (req, res) => {
+  const { from, content, room, to } = req.body;
   const options = {
     upsert: true,
     new: true,
     setDefaultsOnInsert: true,
   };
-  chatModel
-    .findOneAndUpdate(
-      { from: from, to: to, username: username },
-      { $push: { content: message } },
-      options
-    )
+
+  const newMessage = new messageModel({
+    from,
+    to,
+    content,
+    room,
+  });
+
+  newMessage
+    .save()
     .then((result) => {
-      console.log(result);
+      chatModel
+        .findOneAndUpdate(
+          { from: from, to: to },
+          { $push: { message: result._id } },
+          options
+        )
+        .then((result) => {
+          console.log(result);
+          res.status(200).json(result);
+        })
+        .catch((err) => {
+          console.log("err", err);
+        });
     })
     .catch((err) => {
-      console.log("err", err);
+      console.log(err);
+      res.json(err);
     });
 };
 const updateHistory = (req, res) => {
@@ -69,4 +121,10 @@ const updateHistory = (req, res) => {
     });
 };
 
-module.exports = { addMessage, getChat, getHistory, updateHistory };
+module.exports = {
+  addMessage,
+  getChat,
+  updateHistory,
+  createRoom,
+  getRoomMessages,
+};

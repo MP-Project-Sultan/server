@@ -13,7 +13,7 @@ const authorization = require("./../middleware/authorization");
 const postRouter = express.Router()
 postRouter.get("/getPostsAdmin", authentication, authorization, getPostsAdmin);
 postRouter.post("/addPost", authentication, addPost);
-postRouter.get("/getPosts", authentication, getPosts);
+postRouter.get("/getPosts", getPosts);
 postRouter.delete("/deletePost/:id", authentication,deletePost);
 postRouter.get("/getPostById/:id", authentication,getPostById);
 postRouter.put("/updatePost/:id",authentication, updatePost);
