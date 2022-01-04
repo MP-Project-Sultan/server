@@ -55,7 +55,6 @@ const register = async (req, res) => {
             <p> Thank you for registeration , kindly confirm your email by insert code on following link</p>
             <a href="http://localhost:3000/active/${result._id} click here</a>`,
         })
-        // .catch((err) => console.log(err));
       res.status(201).json(result);
     })
     .catch((err) => {
@@ -93,7 +92,6 @@ const login = (req, res) => {
               id: result._id,
               isDel: result.isDel,
             };
-            // console.log(payload);
             console.log(result);
 
             const crackedpwd = await bcrypt.compare(password, result.password);
@@ -135,7 +133,6 @@ const deleteUser = (req, res) => {
     });
 };
 const updateUser = async (req, res) => {
-  // const hashpwd2 = await bcrypt.hash(password, SALT);
 
   const { email, password, username, img } = req.body;
   const { id } = req.params;
