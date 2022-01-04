@@ -19,7 +19,6 @@ const addPost = (req, res) => {
     });
 };
 const getPostsAdmin = (req, res) => {
-  
   postModel
     .find()
     .populate("commentId userId like")
@@ -85,6 +84,19 @@ const updatePost = (req, res) => {
       res.status(400).json(err);
     });
 };
+const getPostUser = (req, res) => {
+    const { id } = req.params
+
+  postModel
+    .find({ userId: id})
+
+    .then((result) => {
+      res.status(200).json(result);
+    })
+    .catch((err) => {
+      res.status(400).json(err);
+    });
+};
 
 module.exports = {
   getPostsAdmin,
@@ -93,4 +105,5 @@ module.exports = {
   getPostById,
   getPosts,
   updatePost,
+  getPostUser,
 };
