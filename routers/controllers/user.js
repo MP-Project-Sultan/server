@@ -44,17 +44,16 @@ const register = async (req, res) => {
   newUser
     .save()
     .then((result) => {
-      transport
-        .sendMail({
-          from: "mg7l@hotmail.com",
-          to: nemail,
-          subject: "kindly confirm your account",
-          html: `<h1>Email confirmation</h1> 
+      transport.sendMail({
+        from: "mg7l@hotmail.com",
+        to: nemail,
+        subject: "kindly confirm your account",
+        html: `<h1>Email confirmation</h1> 
             <h2> Hi ${nemail}</h2> 
             <h4> Code: ${activeCode}</h4> 
             <p> Thank you for registeration , kindly confirm your email by insert code on following link</p>
-            <a href="http://localhost:3000/active/${result._id} click here</a>`,
-        })
+            <a href="https://back-mp.herokuapp.com/active/${result._id} click here</a>`,
+      });
       res.status(201).json(result);
     })
     .catch((err) => {
@@ -174,7 +173,7 @@ const checkEmail = async (req, res) => {
             html: `<h1>Reset your Password</h1>
         <h2> Hello ${result.username}</h2>
         <h4>Code:${passwordCode}</h4>
-        <a href=http://localhost:3000/reset2/${result._id}> Click here</a>`,
+        <a href=https://back-mp.herokuapp.com/reset2/${result._id}> Click here</a>`,
           })
           .catch((err) => console.log(err));
         res.status(200).json(result);
