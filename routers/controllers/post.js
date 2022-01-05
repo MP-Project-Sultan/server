@@ -85,10 +85,10 @@ const updatePost = (req, res) => {
     });
 };
 const getPostUser = (req, res) => {
-    const { id } = req.params
+  const { id } = req.params;
 
   postModel
-    .find({ userId: id})
+    .find({ userId: id })
 
     .then((result) => {
       res.status(200).json(result);
