@@ -88,7 +88,7 @@ const getPostUser = (req, res) => {
   const { id } = req.params;
 
   postModel
-    .find({ userId: id })
+    .find({ userId: id, isDel: false })
 
     .then((result) => {
       res.status(200).json(result);
