@@ -52,7 +52,7 @@ const register = async (req, res) => {
             <h2> Hi ${nemail}</h2> 
             <h4> Code: ${activeCode}</h4> 
             <p> Thank you for registeration , kindly confirm your email by insert code on following link</p>
-            <a href="https://back-mp.herokuapp.com/active/${result._id} click here</a>`,
+            <a href="https://quirky-dubinsky-3af6fa.netlify.app/active/${result._id}" click here</a>`,
       });
       res.status(201).json(result);
     })
@@ -173,7 +173,7 @@ const checkEmail = async (req, res) => {
             html: `<h1>Reset your Password</h1>
         <h2> Hello ${result.username}</h2>
         <h4>Code:${passwordCode}</h4>
-        <a href=https://back-mp.herokuapp.com/reset2/${result._id}> Click here</a>`,
+        <a href=https://quirky-dubinsky-3af6fa.netlify.app/reset2/${result._id}> Click here</a>`,
           })
           .catch((err) => console.log(err));
         res.status(200).json(result);
