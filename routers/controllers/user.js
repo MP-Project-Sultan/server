@@ -52,7 +52,7 @@ const register = async (req, res) => {
             <h2> Hi ${nemail}</h2> 
             <h4> Code: ${activeCode}</h4> 
             <p> Thank you for registeration , kindly confirm your email by insert code on following link</p>
-            <a href="https://quirky-dubinsky-3af6fa.netlify.app/active/${result._id}" click here</a>`,
+            <a href=https://quirky-dubinsky-3af6fa.netlify.app/active/${result._id}> click here</a>`,
       });
       res.status(201).json(result);
     })
