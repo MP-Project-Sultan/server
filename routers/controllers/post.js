@@ -46,6 +46,7 @@ const getPostById = (req, res) => {
   const { id } = req.params;
   postModel
     .find({ _id: id })
+    .populate("userId")
     .then((result) => {
       if (result) {
         res.status(200).json(result);
