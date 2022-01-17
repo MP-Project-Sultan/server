@@ -63,10 +63,10 @@ const getCommentsForPost = (req, res) => {
 const deleteComment = (req, res) => {
   const { id } = req.params;
   commentModel
-    .findOneAndRemove(id)
+    .findByIdAndRemove({ _id:id }, { new: true })
     .exec()
     .then((result) => {
-      res.status(200).json("Deleted");
+      res.status(200).json(result);
     })
     .catch((err) => {
       res.status(400).json(err);
