@@ -19,7 +19,7 @@ const addVot = (req, res) => {
   });
 };
 const deleteVot = (req, res) => {
-  const { id } = req.body;
+  const { id } = req.params;
   votModel
     .findByIdAndRemove({ _id: id })
     .exec()

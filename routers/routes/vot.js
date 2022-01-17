@@ -6,6 +6,6 @@ const authorization = require("./../middleware/authorization");
 
 const votRouter = express.Router();
 votRouter.post("/addVot", authentication, addVot);
-votRouter.delete("/deleteVot", authentication, deleteVot);
+votRouter.put("/deleteVot/:id", authentication, deleteVot);
 
 module.exports = votRouter;
