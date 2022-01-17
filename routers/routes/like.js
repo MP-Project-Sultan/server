@@ -6,6 +6,6 @@ const authorization = require("./../middleware/authorization")
 
 const likeRouter = express.Router();
 likeRouter.post("/addLike",authentication , addLike)
-likeRouter.delete("/deleteLike" , authentication , deleteLike)
+likeRouter.put("/deleteLike/:id" , authentication , deleteLike)
 
 module.exports = likeRouter

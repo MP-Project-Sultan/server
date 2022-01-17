@@ -19,7 +19,7 @@ const addLike = (req, res) => {
   });
 };
 const deleteLike = (req, res) => {
-  const { id } = req.body;
+  const { id } = req.params;
   likeModel
     .findByIdAndRemove({ _id: id })
     .exec()
