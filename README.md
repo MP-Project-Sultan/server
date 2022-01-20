@@ -15,7 +15,9 @@
  ### Admins there have full control like Delete and update and spam users with admin dashboard
  ### Users Can add and update thire own Posts 
 #### server side url https://github.com/MP-Project-Sultan/client
-#### project deployed there https://quirky-dubinsky-3af6fa.netlify.app
+#### project deployed on Netlify => https://quirky-dubinsky-3af6fa.netlify.app
+#### project deployed on Heroku => https://pull-stack-developers.herokuapp.com
+
 #### Trello link https://trello.com/b/6I1hyUj7
 
 
